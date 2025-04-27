@@ -1,0 +1,47 @@
+{% load static %}
+<div id="client-form" class="client-form-container">
+    <form
+        hx-post="{% if client.id %}{% url 'edit_client' client.id %}{% else %}{% url 'client_management' %}{% endif %}"
+        hx-target="#client-form"  
+        hx-swap="outerHTML"
+    >
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Имя:</label>
+            {{ form.name }} <!-- Поле ввода для имени -->
+            {% if form.name.errors %}
+                <div class="text-danger">
+                    {% for error in form.name.errors %}
+                        <p>{{ error }}</p> <!-- Ошибки отображаются под полем -->
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            {{ form.email }} <!-- Поле ввода для email -->
+            {% if form.email.errors %}
+                <div class="text-danger">
+                    {% for error in form.email.errors %}
+                        <p>{{ error }}</p> <!-- Ошибки отображаются под полем -->
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Телефон:</label>
+            {{ form.phone }} <!-- Поле ввода для телефона -->
+            {% if form.phone.errors %}
+                <div class="text-danger">
+                    {% for error in form.phone.errors %}
+                        <p>{{ error }}</p> <!-- Ошибки отображаются под полем -->
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>

@@ -1,0 +1,24 @@
+<tr id="client-{{ client.id }}">
+    <td>{{ client.name }}</td>
+    <td>{{ client.email }}</td>
+    <td>{{ client.phone }}</td>
+    <td>
+        <button
+            class="btn btn-sm btn-warning"
+            hx-get="{% url 'edit_client' client.id %}"
+            hx-target="#modalContent"
+            data-bs-toggle="modal"
+            data-bs-target="#editModal"
+        >
+            Изменить
+        </button>
+        <button
+            class="btn btn-sm btn-danger ms-2"
+            hx-delete="{% url 'delete_client' client.id %}"
+            hx-target="#client-{{ client.id }}"
+            hx-confirm="Вы уверены, что хотите удалить клиента {{ client.name }}?"
+        >
+            Удалить
+        </button>
+    </td>
+</tr>

@@ -1,0 +1,43 @@
+<div id="client-list">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+                <tr id="client-{{ client.id }}">
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.phone }}</td>
+                    <td>
+                        <button
+                            class="btn btn-sm btn-warning"
+                            hx-get="{% url 'edit_client' client.id %}"
+                            hx-target="#modalContent"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editModal"
+                            hx-trigger="click"
+                        >
+                            Изменить
+                        </button>
+                        <button
+                            class="btn btn-sm btn-danger ms-2"
+                            hx-delete="{% url 'delete_client' client.id %}"
+                            hx-target="#client-list"
+                            hx-swap="outerHTML"
+                            hx-confirm="Удалить {{ client.name }}?"
+                            hx-trigger="click"
+                        >
+                            Удалить
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
